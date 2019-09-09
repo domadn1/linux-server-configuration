@@ -157,6 +157,22 @@ $ sudo git clone https://github.com/domadn1/project-catalog.git catalog
 $ cd catalog
 $ sudo mv app.py __init__.py
 ```
+As per the poject-catalog instructions you need to add domain, javascript origin and redirect URIs and then download client_secret.json and copy that content
+I did following configuration to google account
+```code block
+Domain as xip.io
+
+Authorized JavaScript origins as http://52.64.43.68.xip.io
+
+Authorized redirect URIs as http://52.64.43.68.xip.io/oauth2callback and http://52.64.43.68.xip.io/catalog
+
+Create client_secret.json on server and paste that content
+```
+
+```bash
+$ sudo nano /var/www/catalog/catalog/client_secret.json
+```
+
 Open database_setup.py file and replace line no. 78 ENGINE = create_engine('sqlite:///catalog.db') with ENGINE = create_engine('postgresql://catalog:catalog@localhost/catalog')
 ```bash
 $ sudo nano catalog/database_setup.py
@@ -171,6 +187,11 @@ Open __init__.py file
 Replace line no. 31 ENGINE = create_engine('sqlite:///catalog.db?check_same_thread=False') with ENGINE = create_engine('postgresql://catalog:catalog@localhost/catalog')
 
 Replace line no. 430,431,432 with app.run()
+
+Also need to replace line no. 37, 38 as following
+```python
+CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secret.json', 'r').read())['web']['client_id']
+```
 
 ```bash
 $ sudo nano catalog/__init__.py
@@ -251,7 +272,7 @@ $ cd /etc/apache2/sites-available
 $ sudo nano catalog.conf
 ```
 Copy and paste following contents into catalog.conf file and change your email address in ServerAdmin detail
-```python
+```code block
 <VirtualHost *:80>
    ServerName 52.64.43.68
    ServerAlias 52.64.43.68.xip.io
