@@ -19,24 +19,24 @@ From [Amazon Lightsail](https://lightsail.aws.amazon.com/ls/webapp/home/instance
 - Select **Linux/Unix** in Pick your instance image
 - Select **OS Only** in Select a bluprint
 - Select **Ubuntu 16.04 LTS** as your server operating system from many other OS options.
-- In Identify your instance you can see a default name where you can change instance name if would like so or you can keep as it is
-- Finally click on ** Create instance ** button will create an Ubuntu instance
+- In Identify your instance you can see a default name where you can change instance name if you would like so or you can keep as it is
+- Finally click on **Create instance** button will create an Ubuntu instance
 
 It might take few minutes to make instance running and once it is running you can access it.
 
 ### 2. Install private key for this lightsail instance in your local machine
 - First download the private key: Go to the [Account Page](https://lightsail.aws.amazon.com/ls/webapp/account/keys) and download default private key
-- Downloded private key file will be something like LightsailDefaultPrivateKey-*.pem so we will rename it to lightsail_key.rsa and then move it to ~/.ssh
-- help: if you have lightsail_key.rsa in Download folder then open git bash and you can move it with this command. $ sudo mv Downloads/lightsail_key.rsa ~/.ssh/lightsail_key.rsa
-- In your terminal, type: chmod 600 ~/.ssh/lightsail_key.rsa
+- Downloded private key file will be something like LightsailDefaultPrivateKey-*.pem so we will rename it to lightsail_key.rsa and then move it to ~/.ssh in your local machine
+- Help: if you have lightsail_key.rsa in Download folder then open git bash and you can move it with this command. `sudo mv Downloads/lightsail_key.rsa ~/.ssh/lightsail_key.rsa`
+- In your terminal, type: `chmod 600 ~/.ssh/lightsail_key.rsa`
 
 ### 3. Access lightsail instance
-There are many options to connect with server. Here I am using SSH. In browser where you can see running Ubuntu instance and instance description, there we can see option for connecting through browser by clicking on button **Connect using SSH**
+There are many options to connect with server. Here I am using SSH. In browser where you can see running Ubuntu instance and instance description, there is also an option for connecting through browser by clicking on button **Connect using SSH**
 
-Here I am using my own SSH client using Git bash. The Ubuntu instance provides default ** ubuntu user ** so first we need to connect using user ubuntu.
+Here I am using my own SSH client using Git bash. The Ubuntu instance provides default user **ubuntu** so first we need to connect using user ubuntu.
 
 Now connect to the instance with user ubuntu:
-$ ssh -i ~/.ssh/lightsail_key.rsa ubuntu@52.64.43.68
+`$ ssh -i ~/.ssh/lightsail_key.rsa ubuntu@52.64.43.68`
 
 ### 4. Update packages on server
 Once you access server through terminal then apply following commands to install and upgrade latest packages
@@ -48,7 +48,9 @@ sudo apt-get dist-upgrade
 
 ### 5. Generate public key
 In your local machine generate public key. Following command will generate public key which we will use for new user Grader. Give file name as lightsail_grader when it ask for file name.
+```bash
 $ ssh-keygen -t rsa
+```
 
 ### 6. Create new User
 On remote server create new user and copy lightsail_grader.pub file on server
@@ -90,6 +92,7 @@ Open file sshd_config and modify to change ssh port and to turn off SSH password
 $ sudo nano /etc/ssh/sshd_config
 ```
 Port 2200 // change port to 2200
+
 PermitRootLogin no // disable the root login
 
 Once we complete sshd_config modification and save it safely then restart ssh using following command
@@ -124,6 +127,8 @@ Enable Firewall according to this configuration
 ```bash
 $ sudo ufw enable
 ```
+
+![Network configuration](https://github.com/domadn1/linux-server-configuration/blob/master/Ubuntu-NetworkingLightsail.png)
 
 In new terminal login with the grader user...
 ```bash
