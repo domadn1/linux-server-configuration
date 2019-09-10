@@ -31,7 +31,7 @@ It might take few minutes to make instance running and once it is running you ca
 - First download the private key: Go to the [Account Page](https://lightsail.aws.amazon.com/ls/webapp/account/keys) and download default private key
 - Downloded private key file will be something like LightsailDefaultPrivateKey-*.pem so we will rename it to lightsail_key.rsa and then move it to ~/.ssh in your local machine
 - Help: if you have lightsail_key.rsa in Download folder then open git bash and you can move it with this command. `sudo mv Downloads/lightsail_key.rsa ~/.ssh/lightsail_key.rsa`
-- In your terminal, type: `chmod 600 ~/.ssh/lightsail_key.rsa`
+- In your terminal, type: `chmod 777 ~/.ssh/lightsail_key.rsa`
 
 ### 3. Access lightsail instance
 There are many options to connect with server. Here I am using SSH. In browser where you can see running Ubuntu instance and instance description, there is also an option for connecting through browser by clicking on button **Connect using SSH**
