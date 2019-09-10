@@ -22,6 +22,9 @@ From [Amazon Lightsail](https://lightsail.aws.amazon.com/ls/webapp/home/instance
 - In Identify your instance you can see a default name where you can change instance name if you would like so or you can keep as it is
 - Finally click on **Create instance** button will create an Ubuntu instance
 
+Have a reference from following image
+![Create Instance](https://github.com/domadn1/linux-server-configuration/blob/master/CreateLightsailInstance.png)
+
 It might take few minutes to make instance running and once it is running you can access it.
 
 ### 2. Install private key for this lightsail instance in your local machine
@@ -128,6 +131,7 @@ Enable Firewall according to this configuration
 $ sudo ufw enable
 ```
 
+In the Networking tab of your lightsail instance change your firewall configuration as given below 
 ![Network configuration](https://github.com/domadn1/linux-server-configuration/blob/master/Ubuntu-NetworkingLightsail.png)
 
 In new terminal login with the grader user...
